@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wetty-demo
+  labels:
+    app: wetty-demo
+    version: 1.0.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wetty-demo
+  template:
+    metadata:
+      labels:
+        app: wetty-demo
+        version: 1.0.0
+    spec:
+      serviceAccountName: wetty-demo
+      containers:
+        - name: wetty-demo
+          image: boeboe/wetty-demo:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - name: wetty-web
+              containerPort: 3000
+---
